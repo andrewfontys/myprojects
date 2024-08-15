@@ -1,0 +1,59 @@
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: pythonapp-autoscaler
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: pythonapp
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 70
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+    kompose.version: 1.21.0 (992df58d8)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pythonapp
+  name: pythonapp
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      io.kompose.service: pythonapp
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: /snap/kompose/19/kompose-linux-amd64 convert
+        kompose.version: 1.21.0 (992df58d8)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: pythonapp
+    spec:
+      containers:
+      - args:
+        - sh
+        - -c
+        - sleep 10s ; python3 ./app.py
+        image: andrewfb1/kuberneteload:pythonapp
+        imagePullPolicy: ""
+        name: pythonapp
+        ports:
+        - containerPort: 5000
+        resources:
+          requests:
+            cpu: "600m"
+          limits:
+            cpu: "1200m"
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes: null
+status: {}
+    

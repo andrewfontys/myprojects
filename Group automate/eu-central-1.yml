@@ -1,0 +1,21 @@
+---
+- name: New branch
+  hosts: control_node
+  vars:
+    
+  become: true
+
+  tasks:
+   - name: cd
+     shell: 'cd eu-central-1'     
+     
+   - name: run terraform file
+     shell: 'sudo terraform apply'
+     register: command_output
+
+   - debug:
+        var: command_output
+        
+
+
+      

@@ -1,0 +1,17 @@
+version: '3'
+services:
+  pythonapp:
+    build: ./python/
+    depends_on:
+      - mysql
+    ports:
+      - '5000:5000'
+
+  mysql:
+    build: ./mysql/
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'Products'
+      MYSQL_ROOT_PASSWORD: 'Password'
+    ports:
+      - '3306:3306'

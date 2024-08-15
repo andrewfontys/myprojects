@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: traefikingress
+  annotations:
+   # alb.ingress.kubernetes.io/scheme: internet-facing
+    #alb.ingress.kubernetes.io/tags: Environment=dev,Team=mdp-roosh
+
+spec:
+  #ingressClassName: alb
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Exact
+            backend:
+              service:
+                name: pythonapp
+                port:
+                  number: 5000
+          - path: /deletePatient
+            pathType: Exact
+            backend:
+              service:
+                name: pythonapp
+                port:
+                  number: 5000
+          - path: /monitoring
+            pathType: Exact
+            backend:
+              service:
+                name: prometheus-grafana
+                port:
+                  number: 80
+          - path: /login
+            pathType: Exact
+            backend:
+              service:
+                name: prometheus-grafana
+                port:
+                  number: 80
+

@@ -1,0 +1,6 @@
+Flask
+Flask_SQLAlchemy
+Flask_MySQLdb
+Flask_Marshmallow
+flask-mysqldb
+marshmallow-sqlalchemy
