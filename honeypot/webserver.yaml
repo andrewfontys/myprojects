@@ -1,0 +1,22 @@
+# ansible script to clone a git repository
+---
+- name: Clone git repository
+  hosts: webserver
+  shell: git clone your repository
+  become: yes
+  become_user: root
+
+- name: Install Apache
+  apt:
+    name: apache2
+    state: present
+
+- name: Start Apache
+  service:
+    name: apache2
+    state: started
+
+- name: Enable Apache
+  service:
+    name: apache2
+    enabled: yes

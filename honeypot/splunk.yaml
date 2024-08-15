@@ -1,0 +1,43 @@
+---
+- name: Download and Install Splunk Forwarder
+  hosts: ssh
+  become: yes
+
+  vars:
+    splunk_forwarder_url: "https://download.splunk.com/products/universalforwarder/releases/9.2.1/linux/splunkforwarder-9.2.1-78803f08aabb-linux-2.6-amd64.deb"
+    splunk_deb_path: "/opt/splunkforwarder.deb"
+
+  tasks:
+    - name: Ensure the apt package index is updated
+      apt:
+        update_cache: yes
+
+    - name: Ensure 'wget' is installed
+      apt:
+        name: wget
+        state: present
+
+    - name: Download the Splunk forwarder deb package
+      command: wget -O "{{ splunk_deb_path }}" "{{ splunk_forwarder_url }}"
+
+    - name: Install the Splunk forwarder deb package
+      apt:
+        deb: "{{ splunk_deb_path }}"
+        state: present
+
+    - name: Ensure the Splunk forwarder service is enabled and started
+      command: /opt/splunkforwarder/bin/splunk enable boot-start --accept-license --answer-yes
+      args:
+        creates: /etc/systemd/system/splunk.service
+
+    - name: Start the Splunk forwarder service
+      service:
+        name: splunk
+        state: started
+        enabled: yes
+
+    - name: add forward server
+      shell:
+        cmd: /opt/splunkforwarder/bin/splunk add forward-server 172.16.2.2 -mgmt-port 9997 -remote-port 9997 -auth admin:splunk
+
+

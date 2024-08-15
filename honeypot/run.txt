@@ -1,0 +1,1 @@
+ansible-playbook --ask-pass -i hosts.ini splunk.yaml -kK
