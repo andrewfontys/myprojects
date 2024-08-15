@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        h1 {
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 48%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .obfuscated-password {
+            font-family: monospace;
+            color: transparent;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <caption>Registered Users</caption>
+            <tr>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+            {% for doctor in doctors %}
+            <tr>
+                <td>{{ doctor.email }}</td>
+                <td><span class="obfuscated-password">****</span></td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <table>
+            <caption>Company Submissions</caption>
+            <tr>
+                <th>Company Name</th>
+                <th>Company Mail</th>
+                <th>Region</th>
+                <th>Continent</th>
+            </tr>
+            {% for submission in submissions %}
+            <tr>
+                <td>{{ submission[0] }}</td>
+                <td>{{ submission[1] }}</td>
+                <td>{{ submission[2] }}</td>
+                <td>{{ submission[3] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="/dashboard" class="btn btn-success mt-3">Back to dashboard</a>
+    </body>
+    </html>

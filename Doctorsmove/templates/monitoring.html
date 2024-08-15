@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stats</title>
+    <a href="https://18.198.2.31:3000" class="back-btn"> ‍ </a>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="30">
+    <style>
+        /* Common styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            font-family: Arial, sans-serif;
+            background-color: #181b1f;
+            margin: 0;
+            padding: 20px;
+            color: white; /* Change text color to white */
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Styling for monitoring cards */
+        .metric-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+        .card {
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px;
+            color: #333;
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .status {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+        .uptime {
+            font-size: 14px;
+            color: #555;
+        }
+        .failed {
+            color: red;
+        }
+        .succeeded {
+            color: green;
+        }
+
+        /* Styling for iframes */
+        .iframe-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+        .iframe {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 45%;
+            background-color: #333;
+            color: white;
+        }
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Stats</h1>
+
+    
+
+    <!-- Monitoring cards -->
+        <!-- Monitoring cards -->
+        <div class="metric-container">
+            {% for result in ping_results %}
+            <div class="card">
+                <div class="card-title">{{ result.host }}</div>
+                <div class="status {% if result.success %}succeeded{% else %}failed{% endif %}">
+                    {% if result.success %}Status: Available{% else %}Status: {{ result.error }}{% endif %}
+                </div>
+                <div class="uptime">Last Seen: {{ result.last_seen }}</div>
+                <div class="uptime">Uptime: {{ result.uptime }} seconds</div>
+                <div class="uptime">Average RTT: {{ result.rtt_avg }}</div>
+                <div class="uptime">Packet Loss: {{ result.packet_loss }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    <div class="iframe-container">
+        <div class="metric">
+            <h2>Web1 Metrics</h2>
+            <!-- Web1 Metrics iframes -->
+            <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&refresh=5s&from=now-24h&to=now&var-host=18.198.226.108%3A9100&var-job=web_instances&panelId=14" width="100%" height="200" frameborder="0"></iframe>
+            <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&refresh=5s&from=now-24h&to=now&var-host=18.198.226.108%3A9100&var-job=web_instances&theme=dark&panelId=35" width="100%" height="200" frameborder="0"></iframe>
+            <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&refresh=5sfrom=now-24h&to=now&var-host=18.198.226.108%3A9100&var-job=web_instances&theme=dark&panelId=18" width="100%" height="200" frameborder="0"></iframe>
+        </div>
+
+        <div class="metric">
+            <h2>Web2 Metrics</h2>
+            <!-- Web2 Metrics iframes -->
+            <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&refresh=5sfrom=now-24h&to=now&var-host=35.156.74.108%3A9100&var-job=web_instances&theme=dark&panelId=14" width="100%" height="200" frameborder="0"></iframe>
+            <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&refresh=5s&from=now-24h&to=now&var-host=35.156.74.108%3A9100&var-job=web_instances&theme=dark&panelId=35" width="100%" height="200" frameborder="0"></iframe>
+            <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&refresh=5s&from=now-24h&to=now&var-host=35.156.74.108%3A9100&var-job=web_instances&theme=dark&panelId=18" width="100%" height="200" frameborder="0"></iframe>
+        </div>
+    </div>
+    <a href="/dashboard" class="back-btn">Back to dashboard</a>
+    <script>
+        // Function to reload iframes at intervals
+        function reloadIframes() {
+            setInterval(function() {
+                // Reload the Web1 iframes
+                document.getElementById('web1_metric1').src = document.getElementById('web1_metric1').src;
+                document.getElementById('web1_metric2').src = document.getElementById('web1_metric2').src;
+                document.getElementById('web1_metric3').src = document.getElementById('web1_metric3').src;
+
+                // Reload the Web2 iframes
+                document.getElementById('web2_metric1').src = document.getElementById('web2_metric1').src;
+                document.getElementById('web2_metric2').src = document.getElementById('web2_metric2').src;
+                document.getElementById('web2_metric3').src = document.getElementById('web2_metric3').src;
+            }, 3); // Refresh every 30 seconds (adjust as needed)
+        }
+
+        // Run the function on page load
+        window.onload = reloadIframes;
+    </script>
+
+    <!-- JavaScript for reloading the specific part of the page -->
+    <script>
+        function reloadMonitoringCards() {
+            // Make an AJAX request to your Flask endpoint
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/get_updated_data', true);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    // Update the content in the monitoring-cards-container
+                    document.getElementById('monitoring-cards-container').innerHTML = xhr.responseText;
+                } else {
+                    console.log('Request failed. Status: ' + xhr.status);
+                }
+            };
+
+            xhr.onerror = function () {
+                console.log('Request error.');
+            };
+
+            xhr.send();
+        }
+
+        // Refresh monitoring cards every 30 seconds
+        setInterval(reloadMonitoringCards,  10000);
+        
+        // Load initial content on page load
+        window.onload = reloadMonitoringCards;
+    </script>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submission Form</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #f2f2f2;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .submission-container {
+            padding: 50px;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        .submission-container label {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .submission-container input[type="text"],
+        .submission-container select {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .submission-container input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .submission-container input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: relative; /* Make the footer a relative container */
+        }
+
+         /*CSS for the Logout button positioning */
+         .logout-button-container {
+            position: absolute;
+            bottom: 10px; /* Adjust the position as needed */
+            left: 10px; /* Adjust the position as needed */
+        }
+        /* CSS for the rounded rectangle around the button */
+        .logout-button-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px; /* Rounded corners */
+            cursor: pointer;
+        }
+
+        .logout-button-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Doctors on the Move</h1>
+    </header>
+
+    <div class="navbar">
+        <a href="dashboard">Home</a>
+        <a href="/process_submission"> New Company?</a>
+        <a href="/patients">Patients</a>
+        <a href="/buckets">Upload/View files</a>
+        {% if session.get('role') == 'admin' %}
+        <a href="/display">Admin Panel</a>
+        <a href="/stats">Monitoring</a>
+        {% endif %}
+    </div>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger" style="color: red; background-color: #ffe6e6; border: 2px solid darkred; padding: 12px; border-radius: 8px; font-size: 1.2em; font-weight: bold;">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <div class="submission-container">
+        <form action="/process_submission" method="post">
+            <label for="company_name">1. What is the name of the company?</label>
+            <input type="text" name="company_name" required>
+
+            <label for="company_mail">2. What is the email of the company?</label>
+            <input type="text" name="company_mail" required>
+
+            <label>3. Where would you like to save your company's data?</label>
+            <select name="region" required>
+                <option value="Europe Central">Europe Central</option>
+                <option value="Europe East">Europe East</option>
+                <option value="Europe West">Europe West</option>
+            </select>
+
+            <label>4. Where will your staff be operating from?</label>
+            <select name="continent" required>
+                <option value="Europe">Europe</option>
+                <option value="Africa">Africa</option>
+                <option value="Asia">Asia</option>
+                <option value="America">America</option>
+                <option value="Oceania">Oceania</option>
+            </select>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <footer class="footer">
+        <div class="logout-button-container">
+            <form method="post" action="/logout" style="display: inline;">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+        <p>&copy;2023 Doctors On The Move</p>
+    </footer>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6566f31726949f791135ca35/1hgd2b5k6';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>

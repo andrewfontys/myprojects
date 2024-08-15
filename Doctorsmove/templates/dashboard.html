@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #f2f2f2;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .intro {
+            padding: 50px;
+            text-align: center;
+            background-color: #f2f2f2;
+            position: relative;
+            background-image: url('/static/ambulance.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+
+        .intro h1,
+        .intro p {
+            color: #fff; /* Added text color for better contrast */
+            margin: 0; /* Remove default margin */
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            align-items: center; /* Align items vertically */
+        }
+
+        /*CSS for the Logout button positioning */
+        .logout-button-container {
+            position: absolute;
+            bottom: 10px; /* Adjust the position as needed */
+            left: 10px; /* Adjust the position as needed */
+        }
+
+        /* CSS for the rounded rectangle around the button */
+        .logout-button-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px; /* Rounded corners */
+            cursor: pointer;
+        }
+
+        .logout-button-container button:hover {
+            background-color: #45a049;
+        }
+        /* CSS for action buttons container */
+
+        .action-buttons {
+            position: absolute;
+            bottom: 10px; /* Adjust the position as needed */
+            right: 10px; /* Position on the right side */
+        }
+
+        /* CSS for the "Delete Account" button */
+        .delete-button {
+            background-color: #FF0000; /* Red background color */
+            color: white;
+            padding: 8px 16px;
+            margin-top: -60px;
+            border: none;
+            border-radius: 20px; /* Rounded corners */
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background-color: #281f1f; /* Darker red on hover */
+        }
+
+        .popup-container {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 9999;
+        }
+
+        .popup {
+        background: #fff;
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        text-align: center;
+         }
+
+        .popup h2 {
+        color: #FF0000; /* Red text color for the title */
+        }
+
+        .popup button {
+        background-color: #281f1f; /* Red background color for the "Confirm" button */
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        margin: 10px;
+        }
+
+        .popup button:hover {
+        background-color: #FF3333; /* Darker red on hover */
+        }
+        .container {
+            text-align: center;
+        }
+
+        /* ... (other existing styles) ... */
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Doctors on the Move</h1>
+    </header>
+
+    <div class="navbar">
+        <a href="dashboard">Home</a>
+        <a href="/process_submission"> New Company?</a>
+        <a href="/patients">Patients</a>
+        <a href="/buckets">Upload/View files</a>
+    
+        {% if session.get('role') == 'admin' %}
+        <a href="/display">Admin Panel</a>
+        <a href="/stats">Monitoring</a>
+        {% endif %}
+    </div>
+    <div class="box">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification is-danger" style="color: red; background-color: #ffe6e6; border: 2px solid darkred; padding: 12px; border-radius: 8px; font-size: 1.2em; font-weight: bold;">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+    <section class="intro">
+        <div style="background-color: rgba(0, 0, 0, 0.5); padding: 20px;">
+            <h1>Welcome to Doctors on the Move</h1>
+            <p>Providing infrastructure solutions for a better tomorrow.</p>
+            <p>© 2023 Doctors On The Move</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="logout-button-container">
+            <form method="post" action="/logout" style="display: inline;">
+                <button type="submit">Logout</button>
+            </form>
+        </div>
+        <div class="action-buttons">
+            <form method="post" action="/delete_account" onsubmit="return confirm('Are you sure you want to delete your account?');">
+                <button type="button" class="delete-button" onclick="openDeleteAccountPopup()">Delete Account</button>
+            </form>
+        </div>
+
+        <script>
+            function openDeleteAccountPopup() {
+                var popupContainer = document.getElementById("delete-account-popup-container");
+                popupContainer.style.display = "block";
+            }
+
+            function closeDeleteAccountPopup() {
+                var popupContainer = document.getElementById("delete-account-popup-container");
+                popupContainer.style.display = "none";
+            }
+        </script>
+
+        <p></p>
+    </footer>
+
+    <div class="popup-container" id="delete-account-popup-container">
+        <div class="popup">
+            <h2>Confirm Account Deletion</h2>
+            <p>Are you sure you want to delete your account?</p>
+            <button type="button" class="delete-button" onclick="closeDeleteAccountPopup()">Cancel</button>
+            <form method="post" action="/delete_account">
+                <button type="submit" class="delete-button">Confirm</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

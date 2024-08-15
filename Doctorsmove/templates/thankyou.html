@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Thank You</title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #f2f2f2;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #ddd;
+            color: #333;
+        }
+
+        .thank-you-container {
+            padding: 50px;
+            text-align: center;
+            background-color: #f2f2f2;
+        }
+
+        .thank-you-container h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Doctors on the Move</h1>
+    </header>
+
+    <div class="navbar">
+        <a href="dashboard">Home</a>
+		<a href="/process_submission"> New Company?</a>
+        <a href="/patients">Patients</a>
+        <a href="/buckets">Upload/View files</a>
+        {% if session.get('role') == 'admin' %}
+        <a href="/display">Admin Panel</a>
+        <a href="/stats">Monitoring</a>
+        {% endif %}
+    </div>
+
+    <div class="thank-you-container">
+        <h1>Thank you for your submission! The team will contact you soon for more details.</h1>
+        <p>Your submission was successful. Here are your AWS credentials:</p>
+        
+    <!-- CSV download URL -->
+        <a href="{{ url_for('download_csv') }}" class="btn btn-primary">Download AWS Credentials</a>
+    </div>
+
+    <footer class="footer">
+        <p>&copy;2023 Doctors On The Move</p>
+    </footer>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6566f31726949f791135ca35/1hgd2b5k6';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>

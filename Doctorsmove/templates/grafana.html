@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafana Dashboard</title>
+    <style>
+        /* Styling for iframes */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url("/static/orange.png");
+            margin: 0;
+            padding: 20px;
+            color: white; /* Change text color to white */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .metric-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .metric {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 45%;
+            background-color: #333; /* Background color for metrics */
+        }
+
+        .metric h2 {
+            margin-top: 0;
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: white; /* Change text color to white */
+        }
+
+        .back-btn {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Grafana Dashboard</h1>
+<div class="metric-container">
+    <div class="metric">
+        <h2>Web1 Metrics</h2>
+        <!-- Metric 1 -->
+        <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&var-host=3.127.70.176%3A9100&var-host=3.68.82.254%3A9100&var-job=node_exporter&panelId=18" width="100%" height="200" frameborder="0"></iframe>
+
+        <!-- Metric 2 (Web1 instance) -->
+        <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&var-host=3.127.70.176%3A9100&var-host=3.68.82.254%3A9100&var-job=node_exporter&panelId=35" width="100%" height="200" frameborder="0"></iframe>
+
+        <!--Metric 3-->
+        <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&var-host=3.127.70.176%3A9100&var-host=3.68.82.254%3A9100&var-job=node_exporter&panelId=14" width="100%" height="200" frameborder="0"></iframe>
+    </div>
+
+    <div class="metric">
+        <h2>Web2 Metrics</h2>
+        <!-- Metric 1 (Web2 instance) -->
+        <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&var-host=3.127.70.176%3A9100&var-host=3.68.82.254%3A9100&var-job=node_exporter&panelId=53" width="100%" height="200" frameborder="0"></iframe>
+
+        <!-- Metric 2 (Web2 instance) -->
+        <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&var-host=3.127.70.176%3A9100&var-host=3.68.82.254%3A9100&var-job=node_exporter&panelId=48" width="100%" height="200" frameborder="0"></iframe>
+
+        <!--Metric 3-->
+        <iframe src="https://18.198.2.31:3000/d-solo/ov0oEgdik/linux-hosts-metrics-7c-base?orgId=1&var-host=3.127.70.176%3A9100&var-host=3.68.82.254%3A9100&var-job=node_exporter&panelId=55" width="100%" height="200" frameborder="0"></iframe>
+    </div>
+</div>
+
+<a href="/dashboard" class="back-btn">Back to dashboard</a>
+
+</body>
+</html>

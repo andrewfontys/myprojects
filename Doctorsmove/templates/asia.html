@@ -1,0 +1,42 @@
+<head>
+  <title>upload</title>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+      <h1 class="h3 mb-2 text-gray-800">Asia bucket</h1>
+  </nav>
+  <div class="container-fluid">
+      <div class="container">
+          <div class="card o-hidden border-0 shadow-lg my-5">
+              <div class="card-body">
+                  <form action="/asiaupload" method="post" enctype="multipart/form-data">
+                      <p class="card-text">Choose a file to upload it</p>
+                      <input type="file" name="file" value="file">
+                      <hr>
+                      <input type="submit" name="upload" value="Upload" class="btn btn-success">
+                  </form>
+                  <a href="https://asiadoctorbucket.s3.eu-central-1.amazonaws.com/index.html" class="btn btn-success mt-3" target="_blank">View/Download Asia Bucket</a>
+                  <a href="/buckets" class="btn btn-success mt-3">Back to regions</a>
+                </div>
+          </div>
+      </div>
+  </div>
+      <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6566f31726949f791135ca35/1hgd2b5k6';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>

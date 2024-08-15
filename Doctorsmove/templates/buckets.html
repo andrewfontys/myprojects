@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Region</title>
+    <style>
+        /* Style to make buttons blue */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-image: url("/static/files-header.jpg");
+            background-size: cover;
+            background-position: center;
+            height: 100vh; /* Set height to full viewport height */
+            color: #fff;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Center horizontally and vertically */
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: rgb(0, 0, 0);
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        button {
+            background-color: rgb(233, 106, 42);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>What region would you like to upload/view/download files from?</h1>
+        <div>
+            <button onclick="window.location.href='/northamerica'">North America</button>
+            <button onclick="window.location.href='/europe'">Europe</button>
+            <button onclick="window.location.href='/africa'">Africa</button>
+            <button onclick="window.location.href='/asia'">Asia</button>
+        </div>
+        <a href="/dashboard" class="btn btn-success mt-3">Back to dashboard</a>
+    </div>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/6566f31726949f791135ca35/1hgd2b5k6';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>
